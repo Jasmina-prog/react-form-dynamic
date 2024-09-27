@@ -3,11 +3,7 @@ import { useForm, Controller, useFieldArray } from 'react-hook-form';
 function FormDynamic() {
     const { handleSubmit, control } = useForm()
 
-    useForm({
-        defaultValues: {
-            phoneNumber:[ { number: ''}  ]
-        }
-    })
+    
     const submitFn = (data) => {
         console.log("data: ", data);
 
@@ -40,6 +36,9 @@ function FormDynamic() {
             label: 'Buxoro'
         }
     ]
+
+    console.log(fields);
+    
     return (
         <>
             <Form >
@@ -73,7 +72,7 @@ function FormDynamic() {
                             <div className="form-control" key={field.id}>
                                 <Controller
                                 name={`phoneNumber.${index}.number`}
-                                control
+                                control={control}
                                 render={({ field }) => (
                                     <Input {...field}/>
                                 )}
@@ -86,7 +85,7 @@ function FormDynamic() {
                             </div>
                         )
                     })}
-                    <Button onClick={()=> append({ number: "" })}> Add </Button>
+                    <Button onClick={()=> append({  })}> Add </Button>
                 </div>
                 <Button type="primary" htmlType="submit" onClick={handleSubmit(submitFn)}>
                     Submit
